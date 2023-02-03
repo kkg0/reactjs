@@ -34,11 +34,8 @@ const TextForm = (props) => {
     }
 
     const handleCopy = () => {
-        var texttocopy = document.getElementById('myBox');
-        if(texttocopy.value!==''){
-            texttocopy.select();
-            navigator.clipboard.writeText(texttocopy.value);
-            props.showAlert('Copied to Clipboard !','success');
+        if(text!==''){
+            navigator.clipboard.writeText(text);
         }else{
             props.showAlert('No Text found !','danger');
         }
@@ -49,11 +46,12 @@ const TextForm = (props) => {
     }
 
     return <>
+            <div className="container my-3">
                 <div className='container'>
-                    <h1>{props.heading}</h1>
+                    <h1 className='my-2'>{props.heading}</h1>
                     <div className="mb-3">
-                        <textarea className="form-control" id="myBox" rows="8" value={text} onChange={handleOnChange} style={{color: props.mode === 'light' ? 'black' : 'white', backgroundColor: props.mode === 'light' ? 'white' : '#9a9a9d' }}></textarea>
-                        <p className='text-lg-end my-2'><b>{text.split(" ").length}</b> words and <b>{text.length}</b> characters</p>
+                        <textarea className="form-control" id="myBox" rows="8" value={text} onChange={handleOnChange} style={{color: props.mode === 'light' ? 'black' : 'white', backgroundColor: props.mode === 'light' ? 'white' : '#a3a3f1' }}></textarea>
+                        <p className='text-lg-end my-2'><b>{text.split(/\s+/).filter((element)=>{ return element.length !== 0}).length}</b> words and <b>{text.length}</b> characters</p>
                     </div>
                     <button className="btn btn-primary mx-2" onClick={handleUpClick}>Convert to Uppercase</button>
                     <button className="btn btn-primary mx-2" onClick={handleLoClick}>Convert to Lowercase</button>
@@ -61,9 +59,10 @@ const TextForm = (props) => {
                     <button className="btn btn-primary mx-2" onClick={handleClearText}>Clear Text</button>
                 </div>
                 <div className="container my-3">
-                    <h3>Preview</h3>
+                    <h3><u>Preview</u></h3>
                     <p>{text}</p>
                 </div>
+            </div>
             </>;
 }
 

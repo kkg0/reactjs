@@ -6,9 +6,12 @@ const defaultProps = {};
 
 
 const Alert = (props) => {
-    return props.alert && <div className={`alert alert-${props.alert.type} alert-dismissible fade show`} role="alert">
-    <strong>{props.alert.msg}</strong>
-  </div>;
+    return <div style={{height: '50px'}} className='container my-3'>
+              {props.alert && <div className={`alert alert-${props.alert.type} alert-dismissible fade show`} role="alert">
+              <strong>{props.alert.msg}</strong>
+            </div>}
+          </div>;
+      
 }
 
 Alert.propTypes = propTypes;

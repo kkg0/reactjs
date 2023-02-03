@@ -3,6 +3,12 @@ import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 import React, {useState} from 'react'
 import Alert from './components/Alert';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
+import About from './components/About';
 
 
 function App() {
@@ -16,7 +22,7 @@ function App() {
     });
     setTimeout(() => {
       setalert(null);
-    }, 2000);
+    }, 3000);
   }
 
   const toggleMode = () => {
@@ -34,11 +40,14 @@ function App() {
   }
   return (
     <>
-      <Navbar title="TextUtils" mode = {mode} toggleMode = {toggleMode}/>
-      <Alert alert= {alert}/>
-      <div className="container my-3">
-        <TextForm showAlert={showAlert} heading="Enter the text to analyze below" mode = {mode} />
-      </div>
+      <Router>
+        <Navbar title="TextUtils" mode = {mode} toggleMode = {toggleMode}/>
+        <Alert alert= {alert}/>
+        <Routes>
+          <Route exact path='/about' element={<About/>} />
+          <Route exact path='/' element={<TextForm showAlert={showAlert} heading="Enter the text to analyze below" mode = {mode} />} />
+        </Routes>
+      </Router>
     </>
   );
 }
